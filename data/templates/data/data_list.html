@@ -1,0 +1,40 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Daily Progress Data View</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/print.css' %}" media="print">
+</head>
+
+<body>
+    <header>
+        <h1 class="text-center">
+            America Health Care Services - List Of Submitted Data
+        </h1>
+        <a class="create-button float-right" href="{% url 'create' %}" title="Create New Data">Create New Data</a>
+    </header>
+    <main>
+        <section>
+            <div>
+                {% for data in data_list %}
+                <a href="{% url 'data-view' pk=data.pk %}">
+                    <h3>{{ data }}</h3>
+                    <div>Submitted By: {{ data.individual_name }} On {{ data.date }}</div><br>
+                </a>
+                {% empty %}
+                <h3>
+                    No Saved Data.
+                    <a class="create-button float-right" href="{% url 'create' %}" title="Create New Data">
+                        Create Data
+                    </a>
+                </h3>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

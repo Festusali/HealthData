@@ -1,0 +1,501 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Daily Progress Note</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/print.css' %}" media="print">
+</head>
+
+<body>
+    <header>
+        <h1 class="text-center">
+            America Health Care Services
+        </h1>
+    </header>
+    <main>
+        <form id="dataForm" method="POST" action="" novalidate>
+            {% csrf_token %}
+            <section>
+                <h3 class="sub-heading">DAILY PROGRESS NOTE</h3>
+                <div>
+                    <div class="form-group">
+                        <div class="input-container col-6 mr-5">
+                            <label for="{{ form.individual_name.id_for_label }}">Individual Name:</label>
+                            <input type="text" id="{{ form.individual_name.id_for_label }}" name="{{ form.individual_name.html_name }}" maxlength="120" required
+                                placeholder="Individual Name...">
+                            <div>{{ form.individual_name.errors }}</div>
+                        </div>
+                        <div class="input-container col-6 ml-5">
+                            <label for="{{ form.staff_name.id_for_label }}">Staff Name:</label>
+                            <input type="text" id="{{ form.staff_name.id_for_label }}" name="{{ form.staff_name.html_name }}" maxlength="120" required placeholder="Staff Name...">
+                            <div>{{ form.staff_name.errors }}</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-container col-6 mr-5">
+                            <label for="{{ form.date.id_for_label }}">Date:</label>
+                            <input id="{{ form.date.id_for_label }}" name="{{ form.date.html_name }}" type="datetime-local" required placeholder="Date">
+                            <div>{{ form.date.errors }}</div>
+                        </div>
+                        <div class="input-container col-6 ml-5">
+                            <label for="{{ form.shhift.id_for_label }}">Shift:</label><br>
+                            <select id="{{ form.shift.id_for_label }}" name="{{ form.shift.html_name }}" required>
+                                <option value="">-------</option>
+                                <option value="A">AM</option>
+                                <option value="P">PM</option>
+                            </select>
+                            <div>{{ form.shift.errors }}</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-container col-full">
+                            <label for="{{ form.diet.id_for_label }}">Diet:</label>
+                            <input id="{{ form.diet.id_for_label }}" name="{{ form.diet.html_name }}" type="text"
+                                maxlength="200" required placeholder="Diet...">
+                            <div>{{ form.diet.errors }}</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h3 class="sub-heading">MEAL INTAKE (BREAKFAST/LUNCH/DINNER)</h3>
+                <div>
+                    <div class="form-group">
+                        <div class="input-container col-6 mr-5">
+                            <label for="{{ form.food_texture_choice.id_for_label }}">Did the individual tolerate food Texture</label>
+                            <span class="cols-separator"></span>
+                            <select id="{{ form.food_texture_choice.id_for_label }}"
+                                name="{{ form.food_texture_choice.html_name }}" required>
+                                <option value="">-------</option>
+                                <option value="Y">Yes</option>
+                                <option value="N">No</option>
+                            </select>
+                            <div>{{ form.food_texture_choice.errors }}</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-container col-9 mr-5">
+                            <label for="{{ form.food_texture_description.id_for_label }}">Describe food texture:</label><br>
+                            <textarea cols="70" rows="5" id="{{ form.food_texture_description.id_for_label }}" name="{{ form.food_texture_description.html_name }}" required placeholder="Describe Food Texture"></textarea>
+                            <div>{{ form.food_texture_description.errors }}</div>
+                        </div>
+                        <div class="input-container col-3 ml-5">
+                            <br>
+                            <label for="{{ form.food_texture1.id_for_label }}">B:</label>
+                            <select id="{{ form.food_texture1.id_for_label }}" name="{{ form.food_texture1.html_name }}" type="text" required>
+                                <option value="">-------</option>
+                                <option value="Y">Yes</option>
+                                <option value="N">No</option>
+                            </select>
+                            <div>{{ form.food_texture1.errors }}</div><br>
+
+                            <label for="{{ form.food_texture2.id_for_label }}">L:</label>
+                            <select id="{{ form.food_texture2.id_for_label }}" name="{{ form.food_texture2.html_name }}" type="text" required>
+                                <option value="">-------</option>
+                                <option value="Y">Yes</option>
+                                <option value="N">No</option>
+                            </select>
+                            <div>{{ form.food_texture2.errors }}</div><br>
+
+                            <label for="{{ form.food_texture3.id_for_label }}">D:</label>
+                            <select id="{{ form.food_texture3.id_for_label }}" name="{{ form.food_texture3.html_name }}" type="text" required>
+                                <option value="">-------</option>
+                                <option value="Y">Yes</option>
+                                <option value="N">No</option>
+                            </select>
+                            <div>{{ form.food_texture3.errors }}</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-container">
+                            <div class="bottom-line">
+                                <label for="{{ form.quantity_consumed1.id_for_label }}" class="mr-5">Consumed?</label>
+                                25% or less
+                                <input id="{{ form.quantity_consumed1.id_for_label }}25" name="{{ form.quantity_consumed1.html_name }}" value="25" type="radio"> B
+                                <span class="cols-separator"></span>
+                                50% or less
+                                <input id="{{ form.quantity_consumed1.id_for_label }}50" name="{{ form.quantity_consumed1.html_name }}" value="50" type="radio"> B
+                                <span class="cols-separator"></span>
+                                75% or less
+                                <input id="{{ form.quantity_consumed1.id_for_label }}75" name="{{ form.quantity_consumed1.html_name }}" value="75" type="radio"> B
+                                <span class="cols-separator"></span>
+                                100% or less
+                                <input id="{{ form.quantity_consumed1.id_for_label }}100" name="{{ form.quantity_consumed1.html_name }}" value="100" type="radio"> B
+                                <div class="error-list">
+                                {{ form.quantity_consumed1.errors }}</div>
+                            </div>
+                            <div class="bottom-line">
+                                <label for="{{ form.quantity_consumed2.id_for_label }}" class="mr-5">Consumed?</label>
+                                25% or less
+                                <input id="{{ form.quantity_consumed2.id_for_label }}25" name="{{ form.quantity_consumed2.html_name }}" value="25" type="radio"> L
+                                <span class="cols-separator"></span>
+                                50% or less
+                                <input id="{{ form.quantity_consumed2.id_for_label }}50" name="{{ form.quantity_consumed2.html_name }}" value="50" type="radio"> L
+                                <span class="cols-separator"></span>
+                                75% or less
+                                <input id="{{ form.quantity_consumed2.id_for_label }}75" name="{{ form.quantity_consumed2.html_name }}" value="75" type="radio"> L
+                                <span class="cols-separator"></span>
+                                100% or less
+                                <input id="{{ form.quantity_consumed2.id_for_label }}100" name="{{ form.quantity_consumed2.html_name }}" value="100" type="radio"> L
+                                <div class="error-list">
+                                {{ form.quantity_consumed2.errors }}</div>
+                            </div>
+                            <div class="bottom-line">
+                                <label for="{{ form.quantity_consumed3.id_for_label }}" class="mr-5">Consumed?</label>
+                                25% or less
+                                <input id="{{ form.quantity_consumed3.id_for_label }}25" name="{{ form.quantity_consumed3.html_name }}" value="25" type="radio"> D
+                                <span class="cols-separator"></span>
+                                50% or less
+                                <input id="{{ form.quantity_consumed3.id_for_label }}50" name="{{ form.quantity_consumed3.html_name }}" value="50" type="radio"> D
+                                <span class="cols-separator"></span>
+                                75% or less
+                                <input id="{{ form.quantity_consumed3.id_for_label }}75" name="{{ form.quantity_consumed3.html_name }}" value="75" type="radio"> D
+                                <span class="cols-separator"></span>
+                                100% or less
+                                <input id="{{ form.quantity_consumed3.id_for_label }}100" name="{{ form.quantity_consumed3.html_name }}" value="100" type="radio"> D
+                                <div class="error-list">
+                                {{ form.quantity_consumed3.errors }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="form-group">
+                        <div class="input-container col-6 mr-5">
+                            <label for="{{ form.consumed_explain.id_for_label }}">If Consumed less than 75% Please Explain</label><br>
+                            <input id="{{ form.consumed_explain.id_for_label }}" name="{{ form.consumed_explain.html_name}}" maxlength="300" type="text" placeholder="Explain why...">
+                            <div>{{ form.consumed_explain.errors }}</div>
+                        </div>
+                        <div class="input-container col-6 ml-5">
+                            <label for="{{ form.liked_unliked.id_for_label }}">What part of the meal did they like or did not like, if applicable?</label><br>
+                            <input id="{{ form.liked_unliked.id_for_label }}" name="{{ form.liked_unliked.html_name }}" type="text" maxlength="300" placeholder="What part and why?...">
+                            <div>{{ form.liked_unliked.errors }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="form-group">
+                        <h5 class="sub-heading col-full">Incident(s)</h5>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-container col-6 mr-5">
+                            <label for="{{ form.incident_on_shift.id_for_label }}">Has there been an incident involving this individual during your shift?</label>
+                            <span class="cols-separator"></span>
+                            <select id="{{ form.incident_on_shift.id_for_label }}" name="{{ form.incident_on_shift.html_name }}" required>
+                                <option value="">-------</option>
+                                <option value="Y">Yes</option>
+                                <option value="N">No</option>
+                            </select>
+                            <div>{{ form.incident_on_shift.errors }}</div>
+                        </div>
+                        <div class="input-container col-6 ml-5">
+                            <label for="{{ form.incident_on_shift_explain.id_for_label }}">Explain:</label>
+                            <input id="{{ form.incident_on_shift_explain.id_for_label }}" name="{{ form.incident_on_shift_explain.html_name }}" type="text" maxlength="300">
+                            <div>{{ form.incident_on_shift_explain.errors }}</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-container col-6 mr-5">
+                            <label for="{{ form.incident_report.id_for_label }}">If yes, has there been an incident report completed before the end of your shift?</label>
+                            <span class="cols-separator"></span>
+                            <select id="{{ form.incident_report.id_for_label }}" name="{{ form.incident_report.html_name }}">
+                                <option value="">-------</option>
+                                <option value="Y">Yes</option>
+                                <option value="N">No</option>
+                            </select>
+                            <div>{{ form.incident_report.errors }}</div>
+                        </div>
+                        <div class="input-container col-6 ml-5">
+                            <label for="{{ form.incident_report_explain.id_for_label }}">Explain:</label>
+                            <input id="{{ form.incident_report_explain.id_for_label }}" name="{{ form.incident_report_explain.html_name }}" type="text" maxlength="300">
+                            <div>{{ form.incident_report_explain.errors }}</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-container col-6 mr-5">
+                            <label for="{{ form.incident_behavior.id_for_label }}">Did the individual display any behaviors during your shift not identified in the BSP?</label>
+                            <span class="cols-separator"></span>
+                            <select id="{{ form.incident_behavior.id_for_label }}" name="{{ form.incident_behavior.html_name }}">
+                                <option value="">-------</option>
+                                <option value="Y">Yes</option>
+                                <option value="N">No</option>
+                            </select>
+                            <div>{{ form.incident_bahavior.errors }}</div>
+                        </div>
+                        <div class="input-container col-6 ml-5">
+                            <label for="{{ form.incident_behavior_explain.id_for_label }}">Explain:</label>
+                            <input id="{{ form.incident_behavior_explain.id_for_label }}" name="{{ form.incident_behavior_explain.html_name}}" type="text" maxlength="300">
+                            <div>{{ form.incident_bahavior_explain.errors }}</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h3 class="sub-heading">MEDICAL CONCERN/MEDICAL APPOINTMENT</h3>
+                <div>
+                    <div class="form-group">
+                        <div class="input-container col-6 mr-5">
+                            <label for="{{ form.observed_symptoms.id_for_label }}">Do you observe any sign and symptoms of illness involving this individual during your shift?</label>
+                            <select id="{{ form.observed_symptoms.id_for_label }}" name="{{ form.observed_symptoms.html_name }}" required>
+                                <option value="">-------</option>
+                                <option value="Y">Yes</option>
+                                <option value="N">No</option>
+                            </select>
+                            <div>{{ form.observed_symptoms.errors }}</div>
+                        </div>
+                        <div class="input-container col-6 ml-5">
+                            <label for="{{ form.observed_symptoms_explain.id_for_label }}">Explain:</label>
+                            <input id="{{ form.observed_symptoms_explain.id_for_label }}" name="{{ form.observed_symptoms_explain.html_name }}" type="text" maxlength="300">
+                            <div>{{ form.observed_symptoms_explain.errors }}</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-container col-6 mr-5">
+                            <label for="{{ form.medical_appointment.id_for_label }}">Is there a medical appointment scheduled and completed during your shift?</label>
+                            <span class="cols-separator"></span>
+                            <select id="{{ form.medical_appointment.id_for_label }}" name="{{ form.medical_appointment.html_name }}" required>
+                                <option value="">-------</option>
+                                <option value="Y">Yes</option>
+                                <option value="N">No</option>
+                            </select>
+                            <div>{{ form.medical_appointment.errors }}</div>
+                        </div>
+                        <div class="input-container col-6 ml-5">
+                            <label for="{{ form.medical_appointment_explain.id_for_label }}">Explain:</label>
+                            <input id="{{ form.medical_appointment_explain.id_for_label }}" name="{{ form.medical_appointment_explain.html_name }}" type="text" maxlength="300">
+                            <div>{{ form.medical_appointment_explain.errors }}</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-container col-6 mr-5">
+                            <label for="{{ form.home_or_job.id_for_label }}">Is the individual home from the day program or from their job?</label>
+                            <span class="cols-separator"></span>
+                            <select id="{{ form.home_or_job.id_for_label }}" name="{{ form.home_or_job.html_name }}" required>
+                                <option value="">-------</option>
+                                <option value="Y">Yes</option>
+                                <option value="N">No</option>
+                            </select>
+                            <div>{{ form.home_or_job.errors }}</div>
+                        </div>
+                        <div class="input-container col-6 ml-5">
+                            <label for="{{ form.home_or_job_explain.id_for_label }}">Explain:</label>
+                            <input id="{{ form.home_or_job_explain.id_for_label }}" name="{{ form.home_or_job_explain.html_name }}" type="text" maxlength="300">
+                            <div>{{ form.home_or_job_explain.errors }}</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-container col-6 mr-5">
+                            <label for="{{ form.side_effects.id_for_label }}">Are there any observable signs/symptoms of side effects of medication(s)?</label>
+                            <span class="cols-separator"></span>
+                            <select id="{{ form.side_effects.id_for_label }}" name="{{ form.side_effects.html_name }}" required>
+                                <option value="">-------</option>
+                                <option value="Y">Yes</option>
+                                <option value="N">No</option>
+                            </select>
+                            <div>{{ form.side_effects.errors }}</div>
+                        </div>
+                        <div class="input-container col-6 ml-5">
+                            <label for="{{ form.side_effects_explain.id_for_label }}">Explain:</label>
+                            <input id="{{ form.side_effects_explain.id_for_label }}" name="{{ form.side_effects_explain.html_name }}" type="text" maxlength="300">
+                            <div>{{ form.side_effects_explain.errors }}</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-container col-6 mr-5">
+                            <label for="{{ form.adaptive_equipment.id_for_label }}">List the adaptive equipment:</label><br>
+                            <input id="{{ form.adaptive_equipment.id_for_label }}" name="{{ form.adaptive_equipment.html_name }}" type="text" maxlength="300" required>
+                            <div>{{ form.adaptive_equipment.errors }}</div>
+                        </div>
+                        <div class="input-container col-6 ml-5">
+                            <label for="{{ form.equipment_concern.id_for_label }}">Any concerns with equipment, if so explain:</label><br>
+                            <input id="{{ form.equipment_concern.id_for_label }}" name="{{ form.equipment_concern.html_name }}" type="text" maxlength="300">
+                            <div>{{ form.equipment_concern.errors }}</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h3 class="sub-heading">PROGRAM ACTIVITIES</h3>
+                <div>
+                    <div class="form-group">
+                        <div class="input-container col-6 mr-5">
+                            <label for="{{ form.program_implemented.id_for_label }}">Is all programs implemented as outlined?</label>
+                            <span class="cols-separator"></span>
+                            <select id="{{ form.program_implemented.id_for_label }}" name="{{ form.program_implemented.html_name }}"
+                                required>
+                                <option value="">-------</option>
+                                <option value="Y">Yes</option>
+                                <option value="N">No</option>
+                            </select>
+                            <div>{{ form.program_implemented.errors }}</div>
+                        </div>
+                        <div class="input-container col-6 ml-5">
+                            <label for="{{ form.program_documented.id_for_label }}">Is Program Documentation completed as outlined?</label>
+                            <span class="cols-separator"></span>
+                            <select id="{{ form.program_documented.id_for_label }}" name="{{ form.program_documented.html_name }}"
+                                required>
+                                <option value="">-------</option>
+                                <option value="Y">Yes</option>
+                                <option value="N">No</option>
+                            </select>
+                            <div>{{ form.program_documented.errors }}</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-container col-6 mr-5">
+                            <label for="{{ form.finance_discussion.id_for_label }}">Discussion of Finance?</label>
+                            <span class="cols-separator"></span>
+                            <select id="{{ form.finance_discussion.id_for_label }}" name="{{ form.finance_discussion.html_name }}" required>
+                                <option value="">-------</option>
+                                <option value="Y">Yes</option>
+                                <option value="N">No</option>
+                            </select>
+                            <div>{{ form.finance_discussion.errors }}</div>
+                        </div>
+                        <div class="input-container col-6 ml-5">
+                            <label for="{{ form.finance_discussion_explain.id_for_label }}">Explain:</label>
+                            <input id="{{ form.finance_discussion_explain.id_for_label }}" name="{{ form.finance_discussion_explain.html_name }}" type="text" maxlength="300">
+                            <div>{{ form.finanace_discussion_explain.errors }}</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-container col-6 mr-5">
+                            <label for="{{ form.home_visitor.id_for_label }}">Is there a visitor in the home during your shift?</label>
+                            <span class="cols-separator"></span>
+                            <select id="{{ form.home_visitor.id_for_label }}" name="{{ form.home_visitor.html_name }}" required>
+                                <option value="">-------</option>
+                                <option value="Y">Yes</option>
+                                <option value="N">No</option>
+                            </select>
+                            <div>{{ form.home_visitor.errors }}</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h3 class="sub-heading">DIRECT SUPPORT STAFF – PROGRESS NOTES</h3>
+                <div>
+                    <p>
+                        WRITE THREE PARAGRAPHS. THE FIRST ONE SUMMARIZES THE FIRST TWO HOURS, THE SECOND PARAGRAPH
+                        SUMMARIZE THE THIRD THROUGH FOURTH HOURS, THE THIRD PARAGRAPH SUMMARIZE HOURS FIVE AND SIX, THE
+                        FOURTH PARAGRAPH SUMMARIZES HOURS SEVEN AND EIGHT/NINE. If you work 12 hour shift, 1st
+                        paragraph: hours 1-3, 2nd paragraph: hours4-6, 3rd paragraph: hours 7-9, 4th paragraph: hour 10
+                        through 12
+                    </p>
+                    <div class="form-group">
+                        <div class="input-container col-3 mr-5">
+                            <label for="{{ form.summary1_date.id_for_label }}">Date/Time</label>
+                            <input type="datetime-local" id="{{ form.summary1_date.id_for_label }}" name="{{ form.summary1_date.html_name }}" required>
+                            <div>{{ form.summary1_date.errors }}</div>
+                        </div>
+                        <div class="input-container col-3 ml-5">
+                            <label for="{{ form.summary1_initial.id_for_label }}">Staff Initial</label>
+                            <input type="text" id="{{ form.summary1_initial.id_for_label }}" name="{{ form.summary1_initial.html_name }}" maxlength="120" required>
+                            <div>{{ form.summary1_initial.errors }}</div>
+                        </div>
+                        <div class="input-container col-6 ml-5">
+                            <label for="{{ form.summary1.id_for_label }}">First Summary</label>
+                            <textarea rows="6" id="{{ form.summary1.id_for_label }}" name="{{ form.summary1.html_name}}" required></textarea>
+                            <div>{{ form.summary1.errors }}</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-container col-3 mr-5">
+                            <label for="{{ form.summary2_date.id_for_label }}">Date/Time</label>
+                            <input type="datetime-local" id="{{ form.summary2_date.id_for_label }}" name="{{ form.summary2_date.html_name }}" required>
+                            <div>{{ form.summary2_date.errors }}</div>
+                        </div>
+                        <div class="input-container col-3 ml-5">
+                            <label for="{{ form.summary2_initial.id_for_label }}">Staff Initial</label>
+                            <input type="text" id="{{ form.summary2_initial.id_for_label }}" name="{{ form.summary2_initial.html_name }}" maxlength="120" required>
+                            <div>{{ form.summary2_initial.errors }}</div>
+                        </div>
+                        <div class="input-container col-6 ml-5">
+                            <label for="{{ form.summary2.id_for_label }}">Second Summary</label>
+                            <textarea rows="6" id="{{ form.summary2.id_for_label }}" name="{{ form.summary2.html_name}}" required></textarea>
+                            <div>{{ form.summary2.errors }}</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-container col-3 mr-5">
+                            <label for="{{ form.summary3_date.id_for_label }}">Date/Time</label>
+                            <input type="datetime-local" id="{{ form.summary3_date.id_for_label }}" name="{{ form.summary3_date.html_name }}" required>
+                            <div>{{ form.summary3_date.errors }}</div>
+                        </div>
+                        <div class="input-container col-3 ml-5">
+                            <label for="{{ form.summary3_initial.id_for_label }}">Staff Initial</label>
+                            <input type="text" id="{{ form.summary3_initial.id_for_label }}" name="{{ form.summary3_initial.html_name}}" maxlength="120" required>
+                            <div>{{ form.summary3_initial.errors }}</div>
+                        </div>
+                        <div class="input-container col-6 ml-5">
+                            <label for="{{ form.summary3.id_for_label }}">Third Summary</label>
+                            <textarea rows="6" id="{{ form.summary3.id_for_label }}" name="{{ form.summary3.html_name }}" required></textarea>
+                            <div>{{ form.summary3.errors }}</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-container col-3 mr-5">
+                            <label for="{{ form.summary4_date.id_for_label }}">Date/Time</label>
+                            <input type="datetime-local" id="{{ form.summary4_date.id_for_label }}" name="{{ form.summary4_date.html_name }}">
+                            <div>{{ form.summary4_date.errors }}</div>
+                        </div>
+                        <div class="input-container col-3 ml-5">
+                            <label for="{{ form.summary4_initial.id_for_label }}">Staff Initial</label>
+                            <input type="text" id="{{ form.summary4_initial.id_for_label }}" name="{{ form.summary4_initial.html_name }}" maxlength="120">
+                            <div>{{ form.summary4_initial.errors }}</div>
+                        </div>
+                        <div class="input-container col-6 ml-5">
+                            <label for="{{ form.summary4.id_for_label }}">Fourth Summary</label>
+                            <textarea rows="6" id="{{ form.summary4.id_for_label }}" name="{{ form.summary4.html_name }}"></textarea>
+                            <div>{{ form.summary4.errors }}</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div>
+                    <div class="form-group">
+                        <div class="input-container">
+                            <label for="{{ form.residential_manager_review.id_for_label }}">Residential Manager Review:</label>
+                            <input type="text" id="{{ form.residential_manager_review.id_for_label }}" name="{{ form.residential_manager_review.html_name}}" maxlength="300" required placeholder="Residential Manager Review...">
+                            <div>{{ form.residential_manager_review.errors }}</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div id="actionButtons" class="submit-button">
+                <a class="create-button float-left" href="{% url 'home' %}" title="Cancel and go to home page">Cancel</a>
+                <button class="float-center" id="printPageButton" onclick="printPage()">
+                    Print
+                </button>
+                <button class="float-right" id="submit">
+                    Submit
+                </button>
+            </div>
+        </form>
+    </main>
+    <!-- <footer>
+        <div>
+            The footer section
+        </div>
+    </footer> -->
+    <script src="{% static 'scripts/script.js' %}"></script>
+    <script>
+        function printPage() {
+            event.preventDefault();
+            document.getElementById("actionButtons").style.display = 'none';
+            window.print();
+            document.getElementById("actionButtons").style.display = 'block';
+        }
+    </script>
+</body>
+
+</html>
