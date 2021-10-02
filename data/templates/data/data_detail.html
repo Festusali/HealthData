@@ -12,7 +12,7 @@
 <body>
     <header>
         <h1 class="text-center">
-            America Health Care Services - Submitted Data
+            American Health Care Services - Submitted Data
         </h1>
     </header>
     <main>
@@ -64,7 +64,7 @@
             <div>
                 <div class="form-group">
                     <div class="input-container col-6 mr-5">
-                        <span class="label">Did the individual tolerate food Texture</span><br>
+                        <span class="label">Did the individual tolerate food Texture</span>
                         <span class="cols-separator">
                             {% if data.food_texture_choice == "Y" %}
                             <span class="box-checked">X</span>Yes
@@ -80,11 +80,11 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="input-container col-9 mr-5">
+                    <div class="input-container col-8 mr-5">
                         <span class="label">Describe food texture:</span><br>
                         <span class="underline cols-separator">{{ data.food_texture_description|safe }}</span>
                     </div>
-                    <div class="input-container col-3 ml-5">
+                    <div class="input-container col-4 ml-5">
                         <br>
                         <span class="label cols-separator">B:</span>
                         <span class="">
@@ -422,7 +422,7 @@
             </div>
         </section>
 
-        <section>
+        <section class="page-break">
             <h3 class="sub-heading">PROGRAM ACTIVITIES</h3>
             <div>
                 <div class="form-group">
@@ -498,7 +498,7 @@
             </div>
         </section>
 
-        <section class="page-break">
+        <section>
             <h3 class="sub-heading">DIRECT SUPPORT STAFF – PROGRESS NOTES</h3>
             <div>
                 <p>
@@ -521,7 +521,9 @@
                 <div class="form-group">
                     <div class="input-container col-full">
                         <span class="label">First Summary</span><br>
-                        <span class="underline cols-separator ml-5">{{ data.summary1 }}</span>
+                        <span class="underline cols-separator ml-5">
+                            <pre>{{ data.summary1 }}</pre>
+                        </span>
                     </div>
                 </div>
                 <div class="form-group">
@@ -537,7 +539,9 @@
                 <div class="form-group">
                     <div class="input-container col-full">
                         <span class="label">Second Summary</span><br>
-                        <span class="underline cols-separator ml-5">{{ data.summary2 }}</span>
+                        <span class="underline cols-separator ml-5">
+                            <pre>{{ data.summary2 }}</pre>
+                        </span>
                     </div>
                 </div>
                 <div class="form-group">
@@ -553,7 +557,9 @@
                 <div class="form-group">
                     <div class="input-container col-full">
                         <span class="label">Third Summary</span><br>
-                        <span class="underline cols-separator ml-5">{{ data.summary3 }}</span>
+                        <span class="underline cols-separator ml-5">
+                            <pre>{{ data.summary3 }}</pre>
+                        </span>
                     </div>
                 </div>
                 <div class="form-group">
@@ -569,7 +575,9 @@
                 <div class="form-group">
                     <div class="input-container col-full">
                         <span class="label">Fourth Summary</span><br>
-                        <span class="underline cols-separator ml-5">{{ data.summary4 }}</span>
+                        <span class="underline cols-separator ml-5">
+                            <pre>{{ data.summary4 }}</pre>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -600,12 +608,17 @@
     </main>
     <script src="{% static 'scripts/script.js' %}"></script>
     <script>
+        function setActionButton(state) {
+            document.getElementById("actionButtons").style.display = state;
+        }
         function printPage() {
             event.preventDefault();
-            document.getElementById("actionButtons").style.display = 'none';
+            setActionButton('none');
             window.print();
-            document.getElementById("actionButtons").style.display = 'block';
+            setActionButton('block');
         }
+        self.addEventListener("beforeprint", setActionButton('none'));
+        self.addEventListener("afterprint", setActionButton('block'));
     </script>
 </body>
 </html>

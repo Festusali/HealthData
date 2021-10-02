@@ -132,6 +132,14 @@ a.create-button {
         width: 100%;
     }
 
+    .col-9 {
+        width: 82%;
+    }
+
+    .col-8 {
+        width: 73%;
+    }
+
     .col-6 {
         width: 50%;
     }
@@ -139,12 +147,8 @@ a.create-button {
     .col-4 {
         width: 25%;
     }
-
-    .col-9 {
-        width: 82%;
-    }
     
-    .col-4 {
+    .col-3 {
         width: 18%;
     }
 

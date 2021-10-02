@@ -1,7 +1,10 @@
 *.docx
 *.zip
-db.sqlite
+*.pdf
+*.pptx
+*.sqlite3
 data_env/
 .vscode/
 health data images
 __pycache__/
+Other Files/

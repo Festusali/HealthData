@@ -3,35 +3,29 @@
 }
 
 body {
-    font-size: 12px;
+    font-size: 8px;
 }
 
 section.page-break {
     page-break-before: always;
 }
 
-h3,
-h1 {
+h1, h3.sub-heading {
+    color: rgb(2, 2, 134);
     margin-bottom: 0px;
+    margin-top: 5px;
 }
 
 header,
 footer {
     background: rgb(1, 139, 139);
     color: white;
-    padding: 10px;
+    padding: 2px;
 }
 
 main {
-    padding: 30px;
+    padding: 0 30px;
 }
-
-/*
-section {
-    padding-top: 15px;
-    padding-bottom: 15px;
-}
-*/
 
 label,
 span.label {
@@ -57,10 +51,6 @@ select {
     text-align: center!important;
 }
 
-h3.sub-heading, h1 {
-    color: rgb(2, 2, 134);
-}
-
 div.form-group {
     border-bottom: 2px solid gray;
 }
@@ -78,23 +68,16 @@ div.form-group {
     border-bottom: 1px solid gray;
 }
 
-.errorlist {
-    background-color: red;
-    color: white;
-    list-style: none;
-    padding: 3px;
-}
-
 .box-unchecked,
 .box-checked {
     text-align: center;
     font-weight: bold;
-    padding: 0px 10px;
-    border: 2px solid black;
+    padding: 0px 7px;
+    border: 1px solid black;
 }
 
 .box-unchecked {
-    padding: 0 16px;
+    padding: 0 10px;
 }
 
 .underline {
@@ -140,7 +123,7 @@ div.submit-button {
     width: 82%;
 }
 
-.col-4 {
+.col-3 {
     width: 18%;
 }
 
